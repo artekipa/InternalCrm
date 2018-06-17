@@ -4,7 +4,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\FilterByUser;
-use App\Traits\FilterByUser;
+
 
 /**
  * Class Vivodeship
@@ -16,7 +16,7 @@ use App\Traits\FilterByUser;
 */
 class Vivodeship extends Model
 {
-    use SoftDeletes, FilterByUser, FilterByUser;
+    use SoftDeletes, FilterByUser, FilterByTeam;
 
     protected $fillable = ['name', 'created_by_id', 'created_by_team_id'];
     protected $hidden = [];

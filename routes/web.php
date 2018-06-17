@@ -24,7 +24,7 @@ $this->post('register', 'Auth\RegisterController@register')->name('auth.register
 Route::get('login/{driver}', 'Auth\LoginController@redirectToSocial')->name('auth.login.social');
 Route::get('{driver}/callback', 'Auth\LoginController@handleSocialCallback')->name('auth.login.social_callback');
 
-Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['middleware' => ['auth', 'approved'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/home', 'HomeController@index');
     
     Route::resource('permissions', 'Admin\PermissionsController');
@@ -91,7 +91,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('internal_notifications_mass_destroy', ['uses' => 'Admin\InternalNotificationsController@massDestroy', 'as' => 'internal_notifications.mass_destroy']);
     Route::resource('notes', 'Admin\NotesController');
     Route::post('notes_mass_destroy', ['uses' => 'Admin\NotesController@massDestroy', 'as' => 'notes.mass_destroy']);
-    Route::post('notes_restore/{id}', ['uses' => 'Admin\NotesController@restore', 'as' => 'notes.rfestore']);
+    Route::post('notes_restore/{id}', ['uses' => 'Admin\NotesController@restore', 'as' => 'notes.restore']);
     Route::delete('notes_perma_del/{id}', ['uses' => 'Admin\NotesController@perma_del', 'as' => 'notes.perma_del']);
     Route::resource('organizations', 'Admin\OrganizationsController');
     Route::post('organizations_mass_destroy', ['uses' => 'Admin\OrganizationsController@massDestroy', 'as' => 'organizations.mass_destroy']);
